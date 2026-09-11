@@ -100,6 +100,11 @@ docker compose up -d --build
 └── data/outputs/           # 检测结果持久化目录
 ```
 
+## 文档
+
+- [部署手册](docs/DEPLOYMENT.md) - 完整部署步骤、配置说明、运维命令
+- [故障排查](docs/TROUBLESHOOTING.md) - 踩坑记录与解决方案
+
 ## 常用运维命令
 
 ```bash
