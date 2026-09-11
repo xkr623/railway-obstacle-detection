@@ -1,0 +1,11 @@
+# 依赖与构建产物（容器内重新安装/构建）
+node_modules/
+dist/
+
+# IDE / 编辑器
+.idea/
+.vscode/
+
+# 杂项
+*.log
+.git/

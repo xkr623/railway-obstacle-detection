@@ -1,0 +1,51 @@
+# ============================================================
+# 铁路障碍物检测系统 - Git 忽略规则
+# ============================================================
+
+# ---------- 数据集（超大，绝不上传） ----------
+railway_obstacles_datasets/
+
+# ---------- 模型权重与训练产物（超大，绝不上传） ----------
+raliway-main/railway_obstacles_detection/
+*.pt
+*.pth
+*.onnx
+
+# ---------- 检测结果输出 ----------
+raliway-main/outputs/
+
+# ---------- 前端依赖与构建产物 ----------
+frontend-main/node_modules/
+frontend-main/dist/
+frontend-main/dist-ssr/
+
+# ---------- Python 缓存 ----------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# ---------- IDE 配置 ----------
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---------- 系统文件 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 日志与临时文件 ----------
+*.log
+*.tar.gz
+*.zip
+
+# ---------- 环境变量 ----------
+.env
+.env.local
+
+# ---------- 监控项目（单独上传到另一个仓库） ----------
+monitoring/

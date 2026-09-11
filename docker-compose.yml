@@ -1,0 +1,48 @@
+# ============================================================
+# 铁路障碍物检测系统 —— Docker Compose 一键编排
+# 部署：docker compose up -d --build
+# ============================================================
+services:
+  # ---------------- 后端：FastAPI + YOLO ----------------
+  backend:
+    build:
+      context: ./raliway-main
+      dockerfile: Dockerfile
+    image: railway-yolo-backend:latest
+    container_name: railway-backend
+    restart: unless-stopped
+    # 检测结果（图片/视频/JSON）持久化到宿主机，容器重建不丢失
+    volumes:
+      - ./data/outputs:/app/raliway-main/outputs
+    # 只在容器网络内暴露端口，不对公网开放（仅前端 Nginx 可访问）
+    expose:
+      - "8000"
+    # 如需在服务器本机直接调试后端，取消下面注释：
+    # ports:
+    #   - "127.0.0.1:8000:8000"
+    healthcheck:
+      # 模型加载预热约需 30~60 秒，start_period 给足启动时间
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/ping123', timeout=5).status==200 else 1)"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ---------------- 前端：Vue3 静态资源 + Nginx 反代 ----------------
+  frontend:
+    build:
+      context: ./frontend-main
+      dockerfile: Dockerfile
+    image: railway-yolo-frontend:latest
+    container_name: railway-frontend
+    restart: unless-stopped
+    ports:
+      # 宿主机 80（HTTP 跳转 HTTPS）、443（HTTPS 主服务）
+      - "80:80"
+      - "443:443"
+    volumes:
+      # 挂载 SSL 证书（自签或 Let's Encrypt）
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      backend:
+        condition: service_healthy

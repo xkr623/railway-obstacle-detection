@@ -1,0 +1,24 @@
+# =========================
+# Web Framework
+# =========================
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+starlette>=0.27.0
+
+# =========================
+# CORS / Upload
+# =========================
+python-multipart>=0.0.6
+
+# =========================
+# Computer Vision
+# =========================
+opencv-python>=4.8.0
+numpy>=1.23.0
+
+# =========================
+# Deep Learning (YOLO)
+# =========================
+torch>=1.13.0
+torchvision>=0.14.0
+ultralytics>=8.0.0

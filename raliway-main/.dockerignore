@@ -1,0 +1,29 @@
+# ===== Python 缓存 / IDE =====
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+.idea/
+.vscode/
+
+# ===== 运行产物（通过数据卷挂载，不打进镜像）=====
+outputs/
+
+# ===== 数据集（训练用，推理服务不需要）=====
+railway_obstacles_datasets/
+
+# ===== YOLO 工程目录：只保留训练好的权重 best.pt =====
+# 内置的一份 ultralytics 源码（pip 已安装，无需打包）
+railway_obstacles_detection/ultralytics/
+# 训练数据 / 中间文件
+railway_obstacles_detection/data/
+railway_obstacles_detection/middle_file/
+railway_obstacles_detection/.idea/
+# 根目录的预训练权重（best.pt 已包含完整模型）
+railway_obstacles_detection/*.pt
+# 验证结果图表
+railway_obstacles_detection/runs/detect/val/
+# 训练目录下只保留 weights 子目录
+railway_obstacles_detection/runs/detect/train/*
+!railway_obstacles_detection/runs/detect/train/weights/
+# weights 中只保留 best.pt
+railway_obstacles_detection/runs/detect/train/weights/last.pt
